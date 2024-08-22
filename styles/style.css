@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.div_header {
+    min-height: 15vh;
+    background-image: linear-gradient(rgba(210, 210, 210, 0.70), rgba(210, 210, 210, 0.70)), url(../imgs/header.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-content: start;
+    align-items: center;
+    object-fit: contain;
+}
+
+.div_main {
+    overflow-y: auto;
+}
+
+.carousel-inner {
+    height: 40vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.carousel-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
