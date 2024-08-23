@@ -8,6 +8,9 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="shortcut icon" href="./imgs/favicon.jpg" type="image/x-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+    </svg>
     <title>Explora Colombia</title>
 </head>
 
@@ -25,16 +28,25 @@
                     </button>
                     <div class="collapse navbar-collapse col-sm-6 justify-content-start ms-4" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                            <a class="nav-link active" aria-current="page" href="./pages/detalles.html">Detalles</a>
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
                             <a class="nav-link" href="./pages/especies.html">Especies invasoras</a>
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
-        <main class="flex-grow-1 col col-sm-12 div_main">
-            <div id="desciption" class="m-5 text-center"></div>
-            <div id="card-container" class="cards row my-3 gap-3 justify-content-center"></div>
+        <main class="flex-grow-1 container col col-sm-12 div_main">
+            <div class="div_inputs row">
+                <div id="checkboxContainer" class="inputs col"></div>
+                <div class="div_search row">
+                    <input type="text" id="searchInput" placeholder="Search for keywords." class="search col-11">
+                    <button class="btn_search col-1" type="button" id="searchButton">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div id="description" class="m-5 text-center"></div>
+            <div id="cardContainer" class="cards row my-3 gap-3 justify-content-center"></div>
         </main>
 
     </div>

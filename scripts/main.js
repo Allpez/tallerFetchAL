@@ -1,59 +1,115 @@
-let description = document.getElementById("desciption")
-let container = document.getElementById("card-container")
+let description = document.getElementById("description");
+let cardContainer = document.getElementById("cardContainer");
+let checkboxContainer = document.getElementById("checkboxContainer");
+let searchButton = document.getElementById("searchButton");
+let searchInput = document.getElementById("searchInput");
+
 let url = "https://api-colombia.com/"
-let urlFinal = url + "/api/v1/Country/Colombia"
+let urlDescription = url + "/api/v1/Country/Colombia"
+let urlDepartaments = url + "/api/v1/Department"
+let urlRegions = url + "/api/v1/Region/{id}/departments"
 
+let departments = [];
+let regions = [];
 
-fetch(urlFinal)
-.then(response => response.json())
-.then(res => {
-    description.innerHTML = `<p>${res.description}</p>`
-})
-.catch(error => console.error("Error al obtener los datos:", error));
-
-if (container.children.length === 0) {
-    const noResultsMessage = document.createElement('div');
-    noResultsMessage.className = 'no-results-message text-center';
-    noResultsMessage.innerHTML = '<H2 class="text-success">No se encontraron resultados.</H2>';
-    container.appendChild(noResultsMessage);
+function cutText(text, maxLength) {
+    if (text.length > maxLength) {
+        return text.substring(0, maxLength) + "...";
+    }
+    return text;
 }
-// } else {
-//     filteredEvents.forEach(event => {
-//         let card = document.createElement("div");
-//         card.className = "card";
-//         card.innerHTML = `
-//             <img class="card-img" src="${event.image}">
-//             <div class="card-body p-1 mt-2">
-//                 <h5 class="card-title">${event.name}</h5>
-//                 <p class="card-text">${event.description}</p>
-//                 <div class="d-flex justify-content-between align-items-center mb-2">
-//                     <p class="m-0">${event.price} $</p>
-//                     <a href="./pages/details.html?id=${event._id}" class="btn button_card">Details</a>
-//                 </div>
-//             </div>`;
-//         cardContainer.appendChild(card);
-//     });
+
+fetch(urlDescription)
+    .then(response => response.json())
+    .then(res => {
+        description.innerHTML = `<p>${res.description}</p>`
+    })
+    .catch(error => console.error("Error al obtener los datos:", error)
+);
+
+fetch(urlDepartaments)
+    .then(response => response.json())
+    .then(data => {
+        departments = data;
+        createCards(departments);
+    })
+    .catch(error => console.error("Error al obtener los datos:", error)
+);
+
+fetch(urlRegions)
+    .then(response => response.json())
+    .then(data => {
+        regions = data;
+        createCheckboxes();
+    })
+    .catch(error => console.error("Error al obtener los datos:", error)
+);
 
 
+function createCards(departments) {
+    cardContainer.innerHTML = '';
+    
+    departments.forEach(department => {
+        let card = document.createElement("div");
+        card.className = "card";
 
+        let cutDescription = cutText(department.description, 100)
 
+        card.innerHTML = `
+            <img class="card-img" src="...">
+            <div class="card-body p-1 mt-2">
+                <h5 class="card-name">${department.name}</h5>
+                <p class="card-text"><span class="fw-bold">Descripción:</span> ${cutDescription}</p>
+                <p class="card-text"><span class="fw-bold">Población:</span> ${department.population}</p>
+                <p class="card-text"><span class="fw-bold">Superficie:</span> ${department.surface}</p>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <a href="./pages/detalles.html?id=${department.id}" class="btn button_card">Details</a>
+                </div>
+            </div>`;
+            cardContainer.appendChild(card);
+    });
+}
 
+function createCheckboxes() {
+    checkboxContainer.innerHTML = '';
 
+    regions.forEach(region => {
+        const checkbox = document.createElement('div');
+        checkbox.className = 'form-check';
+        checkbox.innerHTML = `
+            <input class="form-check-input" type="checkbox" value="${region.name}" id="${region.id}">
+            <label class="form-check-label" for="${region.id}"><span class="p_check">${region.name}</span></label>
+        `;
+        checkboxContainer.appendChild(checkbox);
+    });
 
-// function createCards(page) {
-//     page.innerHTML = '';
+    checkboxContainer.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', filterEvents);
+    });
+}
 
+function filterEvents() {
+    const selectedCategories = Array.from(checkboxContainer.querySelectorAll('input[type="checkbox"]:checked'))
+    .map(checkbox => checkbox.value);
 
-//     fetch(urlFinal)
-//     filteredSeries.forEach(card => {
-//         let card = document.createElement("div");
-//         card.className = "card m-2 col-6 col-sm-4 col-md-2 text-center object-fit-cover border border-primary";
-//         card.innerHTML = `
-//             <img class="card-img rounded-top" src="../imgs/image-1.webp" alt="${serie.title}">
-//             <div class="card-body d-flex flex-column justify-content-between">
-//                 <h5 class="card-title">${serie.title}</h5>
-//                 <p class="card-text">${serie.platform}</p>
-//             </div>`;
-//         page.appendChild(card);
-//     });
-// }
+    const searchText = searchInput.value.toLowerCase();
+
+    cardContainer.innerHTML = '';
+
+    const filteredCards = departments.filter(department => {
+        const isCategoryMatch = selectedCategories.length === 0 || selectedCategories.includes(department.region);
+        const isSearchMatch = department.name.toLowerCase().includes(searchText) || department.description.toLowerCase().includes(searchText);
+        return isCategoryMatch && isSearchMatch;
+    });
+
+    if (filteredCards.length === 0) {
+        const noResultsMessage = document.createElement('div');
+        noResultsMessage.className = 'no-results-message text-center';
+        noResultsMessage.innerHTML = '<H2 class="text-success">No se encontraron resultados.</H2><p class"text-success-emphasis">Por favor intenta con una nueva busqueda.</p>';
+        cardContainer.appendChild(noResultsMessage);
+    } else {
+        createCards(filteredCards)
+    }
+}
+
+searchButton.addEventListener('click', filterEvents);
