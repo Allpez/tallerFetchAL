@@ -28,7 +28,7 @@ fetch(urlCities)
 fetch(urlNaturalAreas)
     .then(response => response.json())
     .then(data => {
-        naturalAreas = data;
+        naturalAreas = data[0].naturalAreas;
         console.log(naturalAreas);
         createNaturalAreaCards(naturalAreas);
     })
@@ -70,13 +70,13 @@ fetch(urlDepartaments)
     .catch(error => console.error("Error al obtener los datos del departamento:", error));
 
 function createCityCards(cities) {
-    citiesContainer.innerHTML = `<h2>Ciudades</h2>`;
+    citiesContainer.innerHTML = '';
 
     if (cities.length > 0) {
         let header = document.createElement('h2');
         header.className = 'text-center';
-        header.textContent = 'Áreas Naturales';
-        areasContainer.appendChild(header);
+        header.textContent = 'Ciudades';
+        citiesContainer.appendChild(header);
 
 
         cities.forEach(city => {
@@ -84,7 +84,7 @@ function createCityCards(cities) {
             card.className = "card";
 
             card.innerHTML = `
-            <img class="card-img w-25" src="../imgs/img-card.jpg">
+            <img class="card-img w-25" src="../imgs/Ciudades-capitales.jpg">
             <div class="card-body p-1 mt-2">
                 <h5 class="card-name">${city.name}</h5>
             </div>`;
@@ -95,23 +95,31 @@ function createCityCards(cities) {
 }
 
 function createNaturalAreaCards(naturalAreas) {
-    areasContainer.innerHTML = '';
+    // Eliminar duplicados utilizando Map y reduce
+    const uniqueAreas = Array.from(naturalAreas.reduce((map, area) => {
+        if (!map.has(area.name)) {
+            map.set(area.name, area);
+        }
+        return map;
+    }, new Map()).values());
 
-    if (naturalAreas.length > 0) {
+    areasContainer.innerHTML = ''; // Limpiar el contenedor de áreas
+
+    if (uniqueAreas.length > 0) {
         let header = document.createElement('h2');
         header.className = 'text-center';
         header.textContent = 'Áreas Naturales';
         areasContainer.appendChild(header);
 
-        naturalAreas.forEach(area => {
+        uniqueAreas.forEach(area => {
             let card = document.createElement("div");
             card.className = "card";
 
             card.innerHTML = `
-                <img class="card-img w-25" src="../imgs/natural-area.jpg">
-                <div class="card-body p-1 mt-2">
-                    <h5 class="card-name">${area.name}</h5>
-                </div>`;
+            <img class="card-img w-25" src="../imgs/img-card.jpg">
+            <div class="card-body p-1 mt-2">
+                <h5 class="card-name">${area.name}</h5>
+            </div>`;
 
             areasContainer.appendChild(card);
         });

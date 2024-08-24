@@ -4,10 +4,10 @@ let checkboxContainer = document.getElementById("checkboxContainer");
 let searchButton = document.getElementById("searchButton");
 let searchInput = document.getElementById("searchInput");
 
-let url = "https://api-colombia.com/"
-let urlDescription = url + "/api/v1/Country/Colombia"
-let urlDepartaments = url + "/api/v1/Department"
-let urlRegions = url + "/api/v1/Region"
+let url = `https://api-colombia.com/`
+let urlDescription = `${url}/api/v1/Country/Colombia`
+let urlDepartaments = `${url}/api/v1/Department`
+let urlRegions = `${url}/api/v1/Region`
 
 let departments = [];
 let regions = [];
