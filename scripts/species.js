@@ -4,19 +4,15 @@ let urlspecies = `${url}/api/v1/InvasiveSpecie`;
 let tableContainer = document.getElementById("tableContainer");
 
 fetch(urlspecies)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
-        const species = data; // Declaración de la variable usando const
+        const species = data; // Asegúrate de que esto sea una lista de especies
+        console.log(species);
+
         createTable(species);
     })
     .catch(error => console.error("Error al obtener los datos de especies invasoras:", error));
 
-   
 function createTable(speciesList) {
     tableContainer.innerHTML = '';
 
@@ -24,8 +20,8 @@ function createTable(speciesList) {
     table.className = "table";
     table.innerHTML = `                
         <thead>
-            <tr class="color">
-                <th class="color">Nombre</th>
+            <tr>
+                <th class="bg-secondary">Nombre</th>
                 <th class="bg-secondary">Nombre científico</th>
                 <th class="bg-secondary">Impacto</th>
                 <th class="bg-secondary">Manejo</th>
@@ -33,13 +29,24 @@ function createTable(speciesList) {
                 <th class="bg-secondary">Imagen</th>
             </tr>
         </thead>
-    `; 
+    `;
 
     const tbody = document.createElement("tbody");
     tbody.className = "tbody";
-    
+
+    // Itera sobre la lista de especies y crea filas dinámicamente
     speciesList.forEach(specie => {
         const tr = document.createElement("tr");
+        
+        // Aplica la clase a la fila según el nivel de riesgo
+        if (specie.riskLevel === 1) {
+            tr.classList.add('table-primary');
+        } else if (specie.riskLevel === 2) {
+            tr.classList.add('table-success');
+        }
+        // Puedes agregar más condiciones según los niveles de riesgo
+
+        // Genera el contenido de la fila
         tr.innerHTML = `
             <td>${specie.name}</td>
             <td>${specie.scientificName}</td>
@@ -48,20 +55,9 @@ function createTable(speciesList) {
             <td>${specie.riskLevel}</td>
             <td><img src="${specie.urlImage}" alt="${specie.name}" style="width:100px; height:auto;"></td>
         `;
-        pintar(tr, specie.riskLevel);
-        console.log(specie.riskLevel)
-            
         tbody.appendChild(tr);
     });
 
     table.appendChild(tbody);
     tableContainer.appendChild(table);
-}
-
-function pintar(tr, riesgo) {
-    if (riesgo === 1) {
-        tr.classList.add('blue');
-    } else if (riesgo === 2) {
-        tr.classList.add('green');
-    }
 }
