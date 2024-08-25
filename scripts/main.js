@@ -1,3 +1,4 @@
+
 let description = document.getElementById("description");
 let cardContainer = document.getElementById("cardContainer");
 let checkboxContainer = document.getElementById("checkboxContainer");
@@ -19,13 +20,17 @@ function cutText(text, maxLength) {
     return text;
 }
 
+function removeDiacritics(text) {
+    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+}
+
 fetch(urlDescription)
     .then(response => response.json())
     .then(res => {
         description.innerHTML = `<p>${res.description}</p>`
     })
-    .catch(error => console.error("Error al obtener los datos:", error)
-    );
+    .catch(error => console.error("Error al obtener los datos:",
+        error));
 
 fetch(urlDepartaments)
     .then(response => response.json())
@@ -33,8 +38,8 @@ fetch(urlDepartaments)
         departments = data;
         createCards(departments);
     })
-    .catch(error => console.error("Error al obtener los datos:", error)
-    );
+    .catch(error => console.error("Error al obtener los datos:",
+        error));
 
 fetch(urlRegions)
     .then(response => response.json())
@@ -42,11 +47,16 @@ fetch(urlRegions)
         regions = data;
         createCheckboxes();
     })
-    .catch(error => console.error("Error al obtener los datos:", error)
-    );
+    .catch(error => console.error("Error al obtener los datos:",
+        error));
 
 function createCards(departments) {
     cardContainer.innerHTML = '';
+
+    let header = document.createElement('h2');
+    header.className = 'text-center';
+    header.textContent = 'Departamentos';
+    cardContainer.appendChild(header);
 
     departments.forEach(department => {
         let card = document.createElement("div");
@@ -59,8 +69,8 @@ function createCards(departments) {
             <div class="card-body p-1 mt-2">
                 <h5 class="card-name">${department.name}</h5>
                 <p class="card-text"><span class="fw-bold">Descripción:</span> ${cutDescription}</p>
-                <p class="card-text"><span class="fw-bold">Población:</span> ${department.population}</p>
-                <p class="card-text"><span class="fw-bold">Superficie:</span> ${department.surface}</p>
+                <p class="card-text"><span class="fw-bold">Población:</span> ${department.population} hab</p>
+                <p class="card-text"><span class="fw-bold">Superficie:</span> ${department.surface} Km<sup>2</sup></p>
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <a href="./pages/details.html?id=${department.id}" class="btn button_card">Details</a>
                 </div>
@@ -71,8 +81,13 @@ function createCards(departments) {
 }
 
 function createCheckboxes() {
-    checkboxContainer.innerHTML = `<h4>Busca el departamento por Región</h4>`;
-    
+    checkboxContainer.innerHTML = '';
+
+    let header = document.createElement('h4');
+    header.className = 'text-center';
+    header.textContent = 'Busca el departamento por Región';
+    checkboxContainer.appendChild(header);
+
     regions.forEach(region => {
         const checkbox = document.createElement('div');
         checkbox.className = 'form-check';
@@ -93,15 +108,21 @@ function filterEvents() {
         .map(checkbox => checkbox.value);
 
     const searchText = searchInput.value.toLowerCase();
+    const searchNormalized = removeDiacritics(searchText);
 
     cardContainer.innerHTML = '';
 
     const filteredCards = departments.filter(department => {
+        const departmentNameNormalized = removeDiacritics(department.name.toLowerCase());
+        const departmentDescriptionNormalized = removeDiacritics(department.description.toLowerCase());
+        const departmentPopulation = department.population.toString().toLowerCase();
+        const departmentSurface = department.surface.toString().toLowerCase();
+
         const isRegionMatch = selectedRegionIds.length === 0 || selectedRegionIds.includes(department.regionId.toString());
-        const isSearchMatch = department.name.toLowerCase().includes(searchText) || 
-                              department.description.toLowerCase().includes(searchText) || 
-                              department.population.toString().includes(searchText) || 
-                              department.surface.toString().includes(searchText);
+        const isSearchMatch = departmentNameNormalized.includes(searchNormalized) ||
+            departmentDescriptionNormalized.includes(searchNormalized) ||
+            departmentPopulation.includes(searchNormalized) ||
+            departmentSurface.includes(searchNormalized);
         return isRegionMatch && isSearchMatch;
     });
 

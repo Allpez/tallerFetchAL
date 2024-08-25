@@ -31,3 +31,17 @@
     height: 100%;
 }
 
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+.green {
+    background-color: green;
+    color: black;
+}
+
+.color {
+    background-color: blue;
+    color: brown;
+}

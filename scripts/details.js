@@ -1,17 +1,22 @@
-
-
+// obtener el parámetro ID de la URL
 const urlParam = window.location.search;
 const urlObjeto = new URLSearchParams(urlParam);
 const departmentId = urlObjeto.get('id');
 
+// Definición de URLs
 let url = "https://api-colombia.com";
 let urlDepartaments = `${url}/api/v1/Department`;
 let urlCities = `${url}/api/v1/Department/${departmentId}/cities`;
 let urlNaturalAreas = `${url}/api/v1/Department/${departmentId}/naturalareas`;
 
+// Identificación y obtención de elementos del DOM
 let citiesContainer = document.getElementById("citiesContainer");
 let areasContainer = document.getElementById("areasContainer");
+let categories = document.getElementById("categories");
+let searchButton = document.getElementById("searchButton");
+let searchInput = document.getElementById("searchInput");
 
+// Arrays Vacíos
 let cities = [];
 let naturalAreas = [];
 
@@ -56,8 +61,8 @@ fetch(urlDepartaments)
                                 <ul class="list-group list-group-flush rounded bg-success-subtle flex-grow-1">                        
                                     <li class="list-group-item"><span class="fw-bold">Descripción: </span>${department.description}</li>
                                     <li class="list-group-item"><span class="fw-bold">Municipios: </span>${department.municipalities}</li>
-                                    <li class="list-group-item"><span class="fw-bold">Superficie: </span>${department.surface} Km<sup>2</sup></li>
                                     <li class="list-group-item"><span class="fw-bold">Población: </span>${department.population} hab</li>
+                                    <li class="list-group-item"><span class="fw-bold">Superficie: </span>${department.surface} Km<sup>2</sup></li>
                                 </ul>
                             </div>
                         </div>
@@ -103,7 +108,7 @@ function createNaturalAreaCards(naturalAreas) {
         return map;
     }, new Map()).values());
 
-    areasContainer.innerHTML = ''; // Limpiar el contenedor de áreas
+    areasContainer.innerHTML = '';
 
     if (uniqueAreas.length > 0) {
         let header = document.createElement('h2');
@@ -125,3 +130,32 @@ function createNaturalAreaCards(naturalAreas) {
         });
     }
 }
+
+function filterEvents() {
+    const selectedCategories = Array.from(categories.querySelectorAll('input[type="checkbox"]:checked'))
+        .map(checkbox => checkbox.value);
+    
+    const searchText = searchInput.value.toLowerCase();
+
+    // Clear previous results
+    citiesContainer.innerHTML = '';
+    areasContainer.innerHTML = '';
+
+    if (selectedCategories.includes("cities") || selectedCategories.length === 0) {
+        const filteredCities = cities.filter(city => city.name.toLowerCase().includes(searchText));
+        createCityCards(filteredCities);
+    }
+
+    if (selectedCategories.includes("areas") || selectedCategories.length === 0) {
+        const filteredAreas = naturalAreas.filter(area => area.name.toLowerCase().includes(searchText));
+        createNaturalAreaCards(filteredAreas);
+    }
+}
+
+// Añadir event listeners a los checkboxes y al input de búsqueda
+categories.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', filterEvents);
+});
+
+searchInput.addEventListener('input', filterEvents);
+searchButton.addEventListener('click', filterEvents);
