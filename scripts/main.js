@@ -1,4 +1,3 @@
-
 let description = document.getElementById("description");
 let cardContainer = document.getElementById("cardContainer");
 let checkboxContainer = document.getElementById("checkboxContainer");
@@ -62,17 +61,17 @@ function createCards(departments) {
         let card = document.createElement("div");
         card.className = "card col-12 col-sm-6 col-md-4 col-lg-3 border border-success";
 
-        let cutDescription = cutText(department.description, 100)
+        let cutDescription = cutText(department.description, 80)
 
         card.innerHTML = `
             <img class="card-img rounded-top" src="../imgs/img-card.jpg">
-            <div class="card-body p-1 mt-2  d-flex flex-column justify-content-between">
+            <div class="card-body mt-2  d-flex flex-column justify-content-between">
                 <h5 class="card-name text-center">${department.name}</h5>
                 <p class="card-text"><span class="fw-bold">Descripción:</span> ${cutDescription}</p>
                 <p class="card-text"><span class="fw-bold">Población:</span> ${department.population} hab</p>
                 <p class="card-text"><span class="fw-bold">Superficie:</span> ${department.surface} Km<sup>2</sup></p>
                 <div class="d-flex justify-content-center mb-2">
-                    <a href="./pages/details.html?id=${department.id}" class="btn button_card border border-success">Details</a>
+                    <a href="./pages/details.html?id=${department.id}" class="btn button_card border border-success">Detalles</a>
                 </div>
             </div>`;
 

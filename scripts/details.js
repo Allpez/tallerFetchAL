@@ -51,6 +51,7 @@ fetch(urlDepartaments)
                 const cardContent = document.createElement("div");
                 cardContent.className = "card2 d-flex";
                 cardContent.innerHTML = `
+                    <div class="row align-items-center">
                         <div class="col-md-5 col-12 mb-3 mb-md-0 d-flex justify-content-center">
                             <img class="img-fluid object-fit-cover img_card_detail border border-success rounded w-75" src="../imgs/details.jpg">
                         </div>
@@ -85,7 +86,7 @@ function createCityCards(cities) {
 
         cities.forEach(city => {
             let card = document.createElement("div");
-            card.className = "card col-12 col-sm-6 col-md-4 col-lg-3 text-center border border-success";
+            card.className = "card col-10 col-sm-6 col-md-4 col-lg-3 text-center border border-success";
 
             card.innerHTML = `
             <img class="card-img" src="../imgs/Ciudades-capitales.jpg">
@@ -99,7 +100,6 @@ function createCityCards(cities) {
 }
 
 function createNaturalAreaCards(naturalAreas) {
-    // Eliminar duplicados utilizando Map y reduce
     const uniqueAreas = Array.from(naturalAreas.reduce((map, area) => {
         if (!map.has(area.name)) {
             map.set(area.name, area);
@@ -117,7 +117,7 @@ function createNaturalAreaCards(naturalAreas) {
 
         uniqueAreas.forEach(area => {
             let card = document.createElement("div");
-            card.className = "card col-12 col-sm-6 col-md-4 col-lg-3 text-center border border-success";
+            card.className = "card col-10 col-sm-6 col-md-4 col-lg-3 text-center border border-success";
 
             card.innerHTML = `
             <img class="card-img" src="../imgs/img-card.jpg">
