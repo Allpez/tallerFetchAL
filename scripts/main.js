@@ -89,10 +89,10 @@ function createCheckboxes() {
 
     regions.forEach(region => {
         const checkbox = document.createElement('div');
-        checkbox.className = 'form-check col-sm-2 text-center';
+        checkbox.className = 'form-check col-sm-2';
         checkbox.innerHTML = `
             <input class="form-check-input border border-success" type="checkbox" value="${region.id}" id="${region.id}">
-            <label class="form-check-label" for="${region.id}"><span class="p_check">${region.name}</span></label>
+            <label class="form-check-label text-start" for="${region.id}"><span class="p_check">${region.name}</span></label>
         `;
         checkboxContainer.appendChild(checkbox);
     });
@@ -127,7 +127,7 @@ function filterEvents() {
 
     if (filteredCards.length === 0) {
         const noResultsMessage = document.createElement('div');
-        noResultsMessage.className = 'no-results-message text-center';
+        noResultsMessage.className = 'text-center';
         noResultsMessage.innerHTML = '<H2 class="text-success">No se encontraron resultados.</H2><p class"text-success-emphasis">Por favor intenta con una nueva busqueda.</p>';
         cardContainer.appendChild(noResultsMessage);
     } else {

@@ -50,7 +50,7 @@ fetch(urlDepartaments)
                         </div>
                         <div class="content col-md-7 col-12">
                             <div class="card-body container-fluid">
-                                <h4 class="name d-card pb-2 text-center">${department.name}</h4>
+                                <h2 class="name d-card pb-2 text-center">${department.name}</h2>
                                 <ul class="list-group list-group-flush rounded bg-success-subtle flex-grow-1">                        
                                     <li class="list-group-item"><span class="fw-bold">Descripción: </span>${department.description}</li>
                                     <li class="list-group-item"><span class="fw-bold">Municipios: </span>${department.municipalities}</li>
@@ -115,7 +115,7 @@ function createNaturalAreaCards(naturalAreas) {
             card.innerHTML = `
             <img class="card-img" src="../imgs/img-card.jpg">
             <div class="card-body p-1 mt-2">
-                <h5 class="card-name">${area.name}</h5>
+                <h4 class="card-name">${area.name}</h4>
             </div>`;
 
             areasContainer.appendChild(card);
@@ -148,4 +148,3 @@ categories.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
 });
 
 searchInput.addEventListener('input', filterEvents);
-searchButton.addEventListener('click', filterEvents);
