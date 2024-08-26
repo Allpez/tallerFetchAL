@@ -113,13 +113,11 @@ function filterEvents() {
 
     const filteredCards = departments.filter(department => {
         const departmentNameNormalized = removeDiacritics(department.name.toLowerCase());
-        const departmentDescriptionNormalized = removeDiacritics(department.description.toLowerCase());
         const departmentPopulation = department.population.toString().toLowerCase();
         const departmentSurface = department.surface.toString().toLowerCase();
 
         const isRegionMatch = selectedRegionIds.length === 0 || selectedRegionIds.includes(department.regionId.toString());
         const isSearchMatch = departmentNameNormalized.includes(searchNormalized) ||
-            departmentDescriptionNormalized.includes(searchNormalized) ||
             departmentPopulation.includes(searchNormalized) ||
             departmentSurface.includes(searchNormalized);
         return isRegionMatch && isSearchMatch;
