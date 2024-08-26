@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="./styles/style.css">
     <link rel="shortcut icon" href="./imgs/favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
     <title>Explora Colombia</title>
 </head>
 
@@ -17,8 +20,11 @@
         <header class="div_header container-fluid">
             <nav class="navbar container-fluid row navbar-expand-sm">
                 <div class="container-fluid justify-content-between pe-1">
-                    <img class="img-logo object-fit-contain col-2 col-sm-2 col-md-1 ms-4" src="./imgs/logo2-colombia.npg.jpg" alt="logo-colombia">
-                    <a href="#" class="col col-sm-4 col-md-4 col-lg-3 ms-5 text-decoration-none text-secondary"><h2>Explora Colombia</h2></a>
+                    <img class="img-logo object-fit-contain col-2 col-sm-2 col-md-1 ms-4  bg-light"
+                        src="./imgs/logo.png" alt="logo-colombia">
+                    <a href="#" class="col col-sm-4 col-md-4 col-lg-3 ms-5 text-decoration-none text-light">
+                        <h1 class="title text-center text-light">Explora Colombia</h1>
+                    </a>
                     <button class="navbar-toggler col-sm-6 col-md-7 col-lg-8" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -26,33 +32,37 @@
                     </button>
                     <div class="collapse navbar-collapse col-sm-6 justify-content-start ms-4" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            <a class="nav-link" href="./pages/species.html">Especies invasoras</a>
+                            <a class="nav-link active text-light fw-bold" aria-current="page" href="#">Home</a>
+                            <a class="nav-link text-light" href="./pages/species.html">Especies invasoras</a>
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
-        <main class="flex-grow-1 container col col-sm-12 div_main">
-            <div class="div_inputs row">
-                <div id="checkboxContainer" class="inputs col"></div>
-                <div class="div_search row">
-                    <input type="text" id="searchInput" placeholder="Search for keywords." class="search col-11">
-                    <button class="btn_search col-1" type="button" id="searchButton">
+        <main class="flex-grow-1 container-fluid">
+            <div class="contenedor container-fluid ">
+                <img src="./imgs/ValleDelCocora.jpg" alt="ValleDelCocora" class="object-fit-fill img">
+                <div class="centrado">
+                    <div id="description" class="m-5 text-center text-light"></div>
+                </div>
+            </div>
+            <div class="div_inputs row justify-content-center">
+                <div id="checkboxContainer" class="inputs row w-75 "></div>
+                <div class="div_search row justify-content-center gap-2">
+                    <input type="text" id="searchInput" placeholder="Search for keywords." class="search col-5">
+                    <button class="btn_search col-1 border border-success" type="button" id="searchButton">
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
             </div>
-            <div id="description" class="m-5 text-center"></div>
-            <div id="cardContainer" class="cards row my-3 gap-3 justify-content-center"></div>
+            <div id="cardContainer" class="cards row m-5 gap-5 justify-content-center"></div>
         </main>
 
     </div>
     <script src="./scripts/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous">
-    </script>
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
 </body>
 
 </html>

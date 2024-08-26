@@ -51,9 +51,8 @@ fetch(urlDepartaments)
                 const cardContent = document.createElement("div");
                 cardContent.className = "card2 d-flex";
                 cardContent.innerHTML = `
-                    <div class="row align-items-center">
                         <div class="col-md-5 col-12 mb-3 mb-md-0 d-flex justify-content-center">
-                            <img class="img-fluid object-fit-cover img_card_detail" src="../imgs/details.jpg">
+                            <img class="img-fluid object-fit-cover img_card_detail border border-success rounded w-75" src="../imgs/details.jpg">
                         </div>
                         <div class="col-md-7 col-12">
                             <div class="card-body container-fluid">
@@ -86,11 +85,11 @@ function createCityCards(cities) {
 
         cities.forEach(city => {
             let card = document.createElement("div");
-            card.className = "card";
+            card.className = "card col-12 col-sm-6 col-md-4 col-lg-3 text-center border border-success";
 
             card.innerHTML = `
-            <img class="card-img w-25" src="../imgs/Ciudades-capitales.jpg">
-            <div class="card-body p-1 mt-2">
+            <img class="card-img" src="../imgs/Ciudades-capitales.jpg">
+            <div class="card-body mt-2">
                 <h5 class="card-name">${city.name}</h5>
             </div>`;
 
@@ -118,10 +117,10 @@ function createNaturalAreaCards(naturalAreas) {
 
         uniqueAreas.forEach(area => {
             let card = document.createElement("div");
-            card.className = "card";
+            card.className = "card col-12 col-sm-6 col-md-4 col-lg-3 text-center border border-success";
 
             card.innerHTML = `
-            <img class="card-img w-25" src="../imgs/img-card.jpg">
+            <img class="card-img" src="../imgs/img-card.jpg">
             <div class="card-body p-1 mt-2">
                 <h5 class="card-name">${area.name}</h5>
             </div>`;

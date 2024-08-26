@@ -60,19 +60,19 @@ function createCards(departments) {
 
     departments.forEach(department => {
         let card = document.createElement("div");
-        card.className = "card";
+        card.className = "card col-12 col-sm-6 col-md-4 col-lg-3 border border-success";
 
         let cutDescription = cutText(department.description, 100)
 
         card.innerHTML = `
-            <img class="card-img w-25" src="../imgs/img-card.jpg">
-            <div class="card-body p-1 mt-2">
-                <h5 class="card-name">${department.name}</h5>
+            <img class="card-img rounded-top" src="../imgs/img-card.jpg">
+            <div class="card-body p-1 mt-2  d-flex flex-column justify-content-between">
+                <h5 class="card-name text-center">${department.name}</h5>
                 <p class="card-text"><span class="fw-bold">Descripción:</span> ${cutDescription}</p>
                 <p class="card-text"><span class="fw-bold">Población:</span> ${department.population} hab</p>
                 <p class="card-text"><span class="fw-bold">Superficie:</span> ${department.surface} Km<sup>2</sup></p>
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <a href="./pages/details.html?id=${department.id}" class="btn button_card">Details</a>
+                <div class="d-flex justify-content-center mb-2">
+                    <a href="./pages/details.html?id=${department.id}" class="btn button_card border border-success">Details</a>
                 </div>
             </div>`;
 
@@ -84,15 +84,15 @@ function createCheckboxes() {
     checkboxContainer.innerHTML = '';
 
     let header = document.createElement('h4');
-    header.className = 'text-center';
+    header.className = 'text-center m-3';
     header.textContent = 'Busca el departamento por Región';
     checkboxContainer.appendChild(header);
 
     regions.forEach(region => {
         const checkbox = document.createElement('div');
-        checkbox.className = 'form-check';
+        checkbox.className = 'form-check col-sm-2 text-center';
         checkbox.innerHTML = `
-            <input class="form-check-input" type="checkbox" value="${region.id}" id="${region.id}">
+            <input class="form-check-input border border-success" type="checkbox" value="${region.id}" id="${region.id}">
             <label class="form-check-label" for="${region.id}"><span class="p_check">${region.name}</span></label>
         `;
         checkboxContainer.appendChild(checkbox);

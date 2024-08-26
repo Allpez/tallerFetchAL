@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="shortcut icon" href="../imgs/favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=New+Amsterdam&display=swap" rel="stylesheet">
     <title>Detalles</title>
 </head>
 
@@ -17,11 +20,10 @@
         <header class="div_header container-fluid">
             <nav class="navbar container-fluid row navbar-expand-sm">
                 <div class="container-fluid justify-content-between pe-1">
-                    <img class="img-logo object-fit-contain col-2 col-sm-2 col-md-1 ms-4"
-                        src="../imgs/logo2-colombia.npg.jpg" alt="logo-colombia">
-                    <a href="../index.html"
-                        class="col col-sm-4 col-md-4 col-lg-3 ms-5 text-decoration-none text-secondary">
-                        <h2>Explora Colombia</h2>
+                    <img class="img-logo object-fit-contain col-2 col-sm-2 col-md-1 ms-4" src="../imgs/logo.png"
+                        alt="logo-colombia">
+                    <a href="../index.html" class="col col-sm-4 col-md-4 col-lg-3 ms-5 text-decoration-none text-light">
+                        <h1 class="title text-center">Explora Colombia</h1>
                     </a>
                     <button class="navbar-toggler col-sm-6 col-md-7 col-lg-8" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
@@ -30,33 +32,40 @@
                     </button>
                     <div class="collapse navbar-collapse col-sm-6 justify-content-start ms-4" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
-                            <a class="nav-link" aria-current="page" href="../index.html">Home</a>
-                            <a class="nav-link" href="./species.html">Especies invasoras</a>
+                            <a class="nav-link text-light" aria-current="page" href="../index.html">Home</a>
+                            <a class="nav-link text-light" href="./species.html">Especies invasoras</a>
                         </div>
                     </div>
                 </div>
             </nav>
             <div class="div_inputs row">
-                <div id="categories">
-                    <div id="checkboxCities" class="inputs col">
-                        <input class="form-check-input" type="checkbox" value="cities" id="cities">
-                        <label class="form-check-label" for="cities"><span class="p_check">Ciudades</span></label>
-                    </div>
-                    <div id="checkboxAreas" class="inputs col">
-                        <input class="form-check-input" type="checkbox" value="areas" id="areas">
-                        <label class="form-check-label" for="areas"><span class="p_check">Areas Naturales</span></label>
-                    </div>
-                </div>
-                <div class="div_search row">
-                    <input type="text" id="searchInput" placeholder="Search for keywords." class="search col-11">
-                    <button class="btn_search col-1" type="button" id="searchButton">
-                        <i class="bi bi-search"></i>
-                    </button>
-                </div>
             </div>
 
         </header>
-        <main class="flex-grow-1 col col-sm-12 div_main">
+        <main class="flex-grow-1 col col-sm-12 container div_main">
+            <div class="row d-flex justify-content-center align-items-center m-5">
+                <div class="d-flex align-items-center col-sm-8 gap-3">
+                    <div id="categories" class="d-flex align-items-center gap-3">
+                        <div id="checkboxCities" class="inputs">
+                            <input class="form-check-input" type="checkbox" value="cities" id="cities">
+                            <label class="form-check-label" for="cities"><span class="p_check">Ciudades</span></label>
+                        </div>
+                        <div id="checkboxAreas" class="inputs">
+                            <input class="form-check-input" type="checkbox" value="areas" id="areas">
+                            <label class="form-check-label" for="areas"><span class="p_check">Areas
+                                    Naturales</span></label>
+                        </div>
+                    </div>
+                    <!-- Barra de búsqueda -->
+                    <div class="div_search d-flex align-items-center">
+                        <input type="text" id="searchInput" placeholder="Search for keywords."
+                            class="search form-control">
+                        <button class="btn_search btn btn-primary ms-2" type="button" id="searchButton">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
             <div id="card"></div>
             <div id="citiesContainer" class="cards row my-3 gap-3 justify-content-center"></div>
             <div id="areasContainer" class="cards row my-3 gap-3 justify-content-center"></div>
