@@ -21,12 +21,12 @@ function createTable(speciesList) {
     table.innerHTML = `                
         <thead>
             <tr">
-                <th class="bg-secondary text-center">Nombre</th>
-                <th class="bg-secondary text-center">Nombre científico</th>
-                <th class="bg-secondary text-center">Impacto</th>
-                <th class="bg-secondary text-center">Manejo</th>
-                <th class="bg-secondary text-center">Riesgo</th>
-                <th class="bg-secondary text-center">Imagen</th>
+                <th class="bg-warning bg-opacity-50 text-center">Nombre</th>
+                <th class="bg-warning bg-opacity-50 text-center">Nombre científico</th>
+                <th class="bg-warning bg-opacity-50 text-center">Impacto</th>
+                <th class="bg-warning bg-opacity-50 text-center">Manejo</th>
+                <th class="bg-warning bg-opacity-50 text-center">Riesgo</th>
+                <th class="bg-warning bg-opacity-50 text-center">Imagen</th>
             </tr>
         </thead>
     `;
@@ -44,12 +44,12 @@ function createTable(speciesList) {
         }
 
         tr.innerHTML = `
-            <td>${specie.name}</td>
-            <td>${specie.scientificName}</td>
-            <td>${specie.impact}</td>
-            <td>${specie.manage}</td>
-            <td>${specie.riskLevel}</td>
-            <td><img src="${specie.urlImage}" alt="${specie.name}" class="object-fit-cover" style="width:100px; height:50%;"></td>
+            <td class="border border-success">${specie.name}</td>
+            <td class="border border-success">${specie.scientificName}</td>
+            <td class="border border-success">${specie.impact}</td>
+            <td class="border border-success">${specie.manage}</td>
+            <td class="border border-success">${specie.riskLevel}</td>
+            <td class="border border-success"><img src="${specie.urlImage}" alt="${specie.name}" class="object-fit-cover" style="width:100px; height:50%;"></td>
         `;
         tbody.appendChild(tr);
     });

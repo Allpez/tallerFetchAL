@@ -1,26 +1,21 @@
-// obtener el parámetro ID de la URL
 const urlParam = window.location.search;
 const urlObjeto = new URLSearchParams(urlParam);
 const departmentId = urlObjeto.get('id');
 
-// Definición de URLs
 let url = "https://api-colombia.com";
 let urlDepartaments = `${url}/api/v1/Department`;
 let urlCities = `${url}/api/v1/Department/${departmentId}/cities`;
 let urlNaturalAreas = `${url}/api/v1/Department/${departmentId}/naturalareas`;
 
-// Identificación y obtención de elementos del DOM
 let citiesContainer = document.getElementById("citiesContainer");
 let areasContainer = document.getElementById("areasContainer");
 let categories = document.getElementById("categories");
 let searchButton = document.getElementById("searchButton");
 let searchInput = document.getElementById("searchInput");
 
-// Arrays Vacíos
 let cities = [];
 let naturalAreas = [];
 
-// Fetch cities
 fetch(urlCities)
     .then(response => response.json())
     .then(data => {
@@ -29,7 +24,6 @@ fetch(urlCities)
     })
     .catch(error => console.error("Error al obtener los datos de ciudades:", error));
 
-// Fetch natural areas
 fetch(urlNaturalAreas)
     .then(response => response.json())
     .then(data => {
@@ -39,7 +33,6 @@ fetch(urlNaturalAreas)
     })
     .catch(error => console.error("Error al obtener los datos de áreas naturales:", error));
 
-// Fetch department details
 fetch(urlDepartaments)
     .then(response => response.json())
     .then(departments => {
@@ -55,7 +48,7 @@ fetch(urlDepartaments)
                         <div class="col-md-5 col-12 mb-3 mb-md-0 d-flex justify-content-center">
                             <img class="img-fluid object-fit-cover img_card_detail border border-success rounded w-75" src="../imgs/details.jpg">
                         </div>
-                        <div class="col-md-7 col-12">
+                        <div class="content col-md-7 col-12">
                             <div class="card-body container-fluid">
                                 <h4 class="name d-card pb-2 text-center">${department.name}</h4>
                                 <ul class="list-group list-group-flush rounded bg-success-subtle flex-grow-1">                        
@@ -136,7 +129,6 @@ function filterEvents() {
     
     const searchText = searchInput.value.toLowerCase();
 
-    // Clear previous results
     citiesContainer.innerHTML = '';
     areasContainer.innerHTML = '';
 
@@ -151,7 +143,6 @@ function filterEvents() {
     }
 }
 
-// Añadir event listeners a los checkboxes y al input de búsqueda
 categories.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', filterEvents);
 });

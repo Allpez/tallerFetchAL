@@ -59,7 +59,7 @@ function createCards(departments) {
 
     departments.forEach(department => {
         let card = document.createElement("div");
-        card.className = "card col-12 col-sm-6 col-md-4 col-lg-3 border border-success";
+        card.className = "card col-10 col-sm-6 col-md-4 col-lg-3 border border-success";
 
         let cutDescription = cutText(department.description, 80)
 
